@@ -1,20 +1,10 @@
-import { createSchema, createYoga } from "graphql-yoga";
+import { createYoga } from "graphql-yoga";
 import { defineEventHandler } from "h3";
+// @ts-expect-error - resolved via alias at runtime
+import { schema } from "#graphql/schema";
 
 const yoga = createYoga({
-  schema: createSchema({
-    typeDefs: /* GraphQL */ `
-      type Query {
-        hello: String!
-      }
-    `,
-    resolvers: {
-      Query: {
-        hello: () => "Hello from GraphQL Yoga!",
-      },
-    },
-  }),
-  fetchAPI: globalThis,
+  schema,
 });
 
 export default defineEventHandler(async (event) => {
