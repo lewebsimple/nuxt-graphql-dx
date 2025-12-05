@@ -11,6 +11,10 @@ This Nuxt module provides a great developer experience for doing amazing things 
 - 🏀 [Online playground](https://stackblitz.com/github/lewebsimple/nuxt-graphql-dx?file=playground%2Fapp.vue)
 
 
+## Features
+- 🧘‍♂️ GraphQL Yoga server endpoint with user-provided schema
+
+
 ## Quick Setup
 
 Install the module to your Nuxt application with one command:
@@ -19,7 +23,26 @@ Install the module to your Nuxt application with one command:
 pnpx nuxi module add nuxt-graphql-dx
 ```
 
-That's it! You can now use Nuxt GraphQL DX in your Nuxt app ✨
+Define your GraphQL schema in `server/graphql/schema.ts`:
+
+```ts
+import { createSchema } from "graphql-yoga";
+
+export const schema = createSchema({
+  typeDefs: /* GraphQL */ `
+      type Query {
+        hello: String!
+      }
+    `,
+  resolvers: {
+    Query: {
+      hello: () => "Hello from Nuxt GraphQL DX Playground!",
+    },
+  },
+});
+```
+
+That's it! Your GraphQL schema is now exposed in your Nuxt app ✨
 
 
 ## Contribution
